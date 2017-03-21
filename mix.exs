@@ -3,7 +3,7 @@ defmodule Crawlex.Mixfile do
 
   def project do
     [app: :crawlex,
-     version: "0.1.0",
+     version: "0.0.0",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -28,6 +28,8 @@ defmodule Crawlex.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [{:httpoison, "~> 0.10.0"},
+     {:poison, "~> 3.0"},
+     {:floki, "~> 0.14.0"}]
   end
 end
