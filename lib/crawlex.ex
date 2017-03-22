@@ -12,7 +12,9 @@ defmodule Crawlex do
       :world
 
   """
-  def hello do
-    :world
+  alias Crawlex.Fetcher
+
+  def run do
+    Fetcher.fetch
   end
 end
