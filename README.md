@@ -1,19 +1,17 @@
 # Crawlex
 
-**TODO: Add description**
+A mafengwo.cn travel articles crawler in Elixir
 
-## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `crawlex` to your list of dependencies in `mix.exs`:
+## Usage
 
-```elixir
-def deps do
-  [{:crawlex, "~> 0.1.0"}]
-end
+Create an mnesia database:
+
+```
+mix amnesia.create -d MafwDB
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/crawlex](https://hexdocs.pm/crawlex).
-
+Run with mix
+```elixir
+mix run -e Crawlex.run
+```
