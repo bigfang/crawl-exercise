@@ -12,9 +12,13 @@ defmodule Crawlex do
       :world
 
   """
-  alias Crawlex.Fetcher
+  alias Crawlex.{Fetcher, Parser}
 
   def run do
     Fetcher.fetch
+    |> Parser.parse
+    |> IO.inspect
+
+    nil
   end
 end
