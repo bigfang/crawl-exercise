@@ -1,6 +1,6 @@
 defmodule Crawlex.Fetcher do
   @moduledoc """
-  Documentation for Crawlex.
+  Fetcher module of Crawlex.
   """
 
   @url "http://www.mafengwo.cn/gonglve/ajax.php?act=get_travellist"

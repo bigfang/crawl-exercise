@@ -3,15 +3,6 @@ defmodule Crawlex do
   Documentation for Crawlex.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Crawlex.hello
-      :world
-
-  """
   alias Crawlex.{Fetcher, Parser}
 
   def run do
