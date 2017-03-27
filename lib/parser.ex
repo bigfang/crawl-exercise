@@ -9,7 +9,6 @@ defmodule Crawlex.Parser do
     |> Floki.find(".tn-item .tn-image a")
     |> Floki.attribute("href")
     |> Enum.map(fn(url) -> "http://www.mafengwo.cn" <> url end)
-    |> Enum.into([])
     |> Enum.map(fn(url) -> MafwDB.Article.add(url) end)
   end
 end
