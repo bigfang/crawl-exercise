@@ -3,11 +3,12 @@ defmodule Crawlex do
   Documentation for Crawlex.
   """
 
-  alias Crawlex.{Fetcher, Parser}
+  alias Crawlex.{Fetcher, Parser, Storer}
 
   def work(arg) do
     Fetcher.fetch(arg)
     |> Parser.parse
+    |> Storer.store
     |> IO.inspect
   end
 
