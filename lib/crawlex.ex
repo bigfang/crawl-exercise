@@ -16,11 +16,24 @@ defmodule Crawlex do
     |> (fn(x) -> Logger.info("Page #{Keyword.get(arg, :page)}: Store #{length(x)} items") end).()
   end
 
+  def crawl(arg, f_pid, p_pid, s_pid) do
+    GenServer.call(f_pid, {:fetch, arg})
+    |> (fn(x) -> Logger.info("Page #{Keyword.get(arg, :page)}: Parse Starting..."); x end).()
+    |> (fn(x) -> GenServer.call(p_pid, {:parse, x}) end).()
+    |> (fn(x) -> Logger.info("Page #{Keyword.get(arg, :page)}: Parse #{length(x)} items"); x end).()
+    |> (fn(x) -> GenServer.call(s_pid, {:store, x}) end).()
+    |> (fn(x) -> Logger.info("Page #{Keyword.get(arg, :page)}: Store #{length(x)} items") end).()
+  end
+
   def run do
     Logger.info("Crawler is Starting!")
+    {:ok, f_pid} = GenServer.start_link(Crawlex.Fetcher, nil)
+    {:ok, p_pid} = GenServer.start_link(Crawlex.Parser, nil)
+    {:ok, s_pid} = GenServer.start_link(Crawlex.Storer, nil)
+
     init_form = [mddid: 10035, pageid: "mdd_index", sort: 2, cost: 0, days: 0, month: 0, tagid: 0, page: 0]
     forms = for n <- 1..2, do: Keyword.put(init_form, :page, n)
-    Enum.map(forms, &crawl/1)
+    Enum.map(forms, &crawl(&1, f_pid, p_pid, s_pid))
     Logger.info("Crawler Finished!")
   end
 end
