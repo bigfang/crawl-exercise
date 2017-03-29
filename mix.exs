@@ -28,9 +28,9 @@ defmodule Crawlex.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:httpoison, "~> 0.10.0"},
+    [{:httpoison, "~> 0.11.0"},
      {:poison, "~> 3.0"},
-     {:floki, "~> 0.14.0"},
+     {:floki, "~> 0.15.0"},
      {:amnesia, "~> 0.2.7"}]
   end
 end
