@@ -17,12 +17,12 @@ defmodule Crawlex do
   end
 
   def crawl(arg, f_pid, p_pid, s_pid) do
-    GenServer.call(f_pid, {:fetch, arg})
-    |> (fn(x) -> Logger.info("Page #{Keyword.get(arg, :page)}: Parse Starting..."); x end).()
-    |> (fn(x) -> GenServer.call(p_pid, {:parse, x}) end).()
-    |> (fn(x) -> Logger.info("Page #{Keyword.get(arg, :page)}: Parse #{length(x)} items"); x end).()
-    |> (fn(x) -> GenServer.call(s_pid, {:store, x}) end).()
-    |> (fn(x) -> Logger.info("Page #{Keyword.get(arg, :page)}: Store #{length(x)} items") end).()
+    body = GenServer.call(f_pid, {:fetch, arg})
+    Logger.info("Page #{Keyword.get(arg, :page)}: Parse Starting...")
+    list = GenServer.call(p_pid, {:parse, body})
+    Logger.info("Page #{Keyword.get(arg, :page)}: Parse #{length(list)} items")
+    res = GenServer.call(s_pid, {:store, list})
+    Logger.info("Page #{Keyword.get(arg, :page)}: Store #{length(res)} items")
   end
 
   def run do
