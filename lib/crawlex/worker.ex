@@ -27,9 +27,9 @@ defmodule Crawlex.Worker do
 
   def work do
     Logger.info("Crawler is Starting!")
-    {:ok, f_pid} = GenServer.start_link(Crawlex.Fetcher, nil)
-    {:ok, p_pid} = GenServer.start_link(Crawlex.Parser, nil)
-    {:ok, s_pid} = GenServer.start_link(Crawlex.Storer, nil)
+    {:ok, f_pid} = GenServer.start_link(Fetcher, nil)
+    {:ok, p_pid} = GenServer.start_link(Parser, nil)
+    {:ok, s_pid} = GenServer.start_link(Storer, nil)
 
     init_form = [mddid: 10035, pageid: "mdd_index", sort: 2, cost: 0, days: 0, month: 0, tagid: 0, page: 0]
     forms = for n <- 1..2, do: Keyword.put(init_form, :page, n)

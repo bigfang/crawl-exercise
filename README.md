@@ -11,7 +11,7 @@ Create an mnesia database:
 mix amnesia.create -d MafwDB
 ```
 
-Run with mix
-```elixir
-mix run -e Crawlex.run
+Run in iex
+```bash
+iex(1)> Crawlex.Worker.run
 ```
