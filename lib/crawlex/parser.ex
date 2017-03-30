@@ -2,6 +2,7 @@ defmodule Crawlex.Parser do
   @moduledoc """
   Parser module of Crawlex.
   """
+  
   use GenServer
 
   def handle_call({:parse, body}, _from, _state) do

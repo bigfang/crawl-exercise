@@ -2,6 +2,7 @@ defmodule Crawlex.Fetcher do
   @moduledoc """
   Fetcher module of Crawlex.
   """
+
   use GenServer
 
   require Logger
