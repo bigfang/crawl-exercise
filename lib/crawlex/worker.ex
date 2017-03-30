@@ -16,16 +16,6 @@ defmodule Crawlex.Worker do
     GenServer.call(__MODULE__, :run)
   end
 
-  def crawl(arg) do
-    arg
-    |> Fetcher.fetch
-    |> (fn(x) -> Logger.info("Page #{Keyword.get(arg, :page)}: Parse Starting..."); x end).()
-    |> Parser.parse
-    |> (fn(x) -> Logger.info("Page #{Keyword.get(arg, :page)}: Parse #{length(x)} items"); x end).()
-    |> Storer.store
-    |> (fn(x) -> Logger.info("Page #{Keyword.get(arg, :page)}: Store #{length(x)} items") end).()
-  end
-
   def crawl(arg, f_pid, p_pid, s_pid) do
     body = GenServer.call(f_pid, {:fetch, arg})
     Logger.info("Page #{Keyword.get(arg, :page)}: Parse Starting...")
