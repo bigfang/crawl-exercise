@@ -14,8 +14,8 @@ defmodule Crawlex.Storer do
   end
 
   def handle_call({:store, list}, _from, _state) do
-    res = list
-          |> Enum.map(fn(url) -> MafwDB.Article.add("http://www.mafengwo.cn" <> url) end)
-    {:reply, res, nil}
+    list
+    |> Enum.map(fn(url) -> MafwDB.Article.add("http://www.mafengwo.cn" <> url) end)
+    |> (&({:reply, &1, nil})).()
   end
 end

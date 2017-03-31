@@ -15,9 +15,9 @@ defmodule Crawlex.Parser do
 
   def handle_call({:parse, body}, _from, _state) do
     {:ok, %{"list" => html}} = Poison.decode(body)
-    urls = html
-           |> Floki.find(".tn-item .tn-image a")
-           |> Floki.attribute("href")
-    {:reply, urls, nil}
+    html
+    |> Floki.find(".tn-item .tn-image a")
+    |> Floki.attribute("href")
+    |> (&({:reply, &1, nil})).()
   end
 end
