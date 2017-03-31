@@ -6,7 +6,7 @@ defmodule Crawlex.Parser do
   use GenServer
 
   def start_link do
-    {:ok, pid} = GenServer.start_link(__MODULE__, nil, name: __MODULE__)
+    GenServer.start_link(__MODULE__, nil, name: __MODULE__)
   end
 
   def parse(term) do
